@@ -1,0 +1,20 @@
+.bg-image{
+    background-image: url('../assets/bg-login.svg');
+    background-size: cover;
+    height: 100dvh;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent */
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 450px;
+}
+
+h1{
+    font: 25px Inter;
+    font-weight: 700;
+}
