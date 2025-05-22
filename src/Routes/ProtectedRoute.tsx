@@ -1,4 +1,3 @@
-import { type JSX } from 'react'
 import { Navigate, Outlet } from 'react-router-dom';
 import { getToken } from '../utils/token';
 

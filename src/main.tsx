@@ -7,16 +7,25 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './Routes/ProtectedRoute';
+import SignUp from './pages/SignUp';
+import PublicRoute from './Routes/PublicRoute';
 
 createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />}/>
+        {/* ini public routes */}
+        <Route element={<PublicRoute/>}>
+          <Route path='/' element={<Login />}/>
+          <Route path="/sign-up" element={<SignUp/>} />
+        </Route>
+
+        {/* ini protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
+
       </Routes>
     </BrowserRouter>
 

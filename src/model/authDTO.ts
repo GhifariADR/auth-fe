@@ -3,6 +3,16 @@ export interface LoginRequest {
     password: string
 }
 
+export interface LogoutRequest {
+    token : string | null;
+}
+
+export interface RegisterRequest {
+    username : string;
+    email : string;
+    password : string;
+}
+
 export interface ApiResponse {
     status: string
     message: string
@@ -13,6 +23,3 @@ export interface Data {
     token: string
 }
 
-export interface LogoutRequest {
-    token : string | null;
-}

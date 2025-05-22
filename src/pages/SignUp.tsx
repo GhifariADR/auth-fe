@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import "../style/Login.css"
-import { login } from '../api/authService';
-import { getToken, saveToken } from '../utils/token';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { register } from '../api/authService';
+import { toast } from 'react-toastify';
 
-const Login: React.FC = () => {
+const SignUp:React.FC = () => {
+
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [token, setToken] = useState<string | null>(null);
+    const [email, setEmail] = useState<string>('');
+
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate();
@@ -17,29 +17,32 @@ const Login: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         setLoading(true)
         e.preventDefault();
-        
 
+        if(username == '' || email == '' || password == ''){
+            toast.error("Please fill form")
+            return
+        }
         try{
-            const response = await login({username, password});
-            
-            if(response.data == null){
+            const response = await register({username,email,password});
+
+            if (response.status == "error"){
                 toast.error(response.message)
-            } else {
-                setToken(response.data.token)
-                toast.success(response.message)           
-                console.log("token = " + response.data.token);
-                saveToken(response.data.token)
-                navigate('/dashboard')
+                return
             }
+
+            toast.success(response.message)
+            navigate('/')
+
+
+        } catch(err) {
+            console.log(err);
             
-        } catch(err){
-           console.log("");
-           
-        } finally {
+        } finally{
             setLoading(false)
         }
-       
+
     }
+
 
   return (
     <div className='bg-image'>
@@ -47,7 +50,7 @@ const Login: React.FC = () => {
             <div className='row d-flex justify-content-center align-items-center'>
                 <div className='card' >
                     <div className='row text-center'>
-                        <h1>Login Account</h1>
+                        <h1>Register Account</h1>
                     </div>
                     <div className='row'>
 
@@ -55,7 +58,7 @@ const Login: React.FC = () => {
                             <div className='row mt-2'>
                                 <input 
                                 type='text'
-                                placeholder='username'
+                                placeholder='Username'
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 className='p-2 border rounded'
@@ -65,22 +68,34 @@ const Login: React.FC = () => {
 
                             <div className='row mt-2'>
                                 <input 
+                                type='email'
+                                placeholder='Email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className='p-2 border rounded'
+                                required
+                                />
+                            </div>
+
+                            <div className='row mt-2'>
+                                <input 
                                 type='password'
-                                placeholder='password'
+                                placeholder='Password'
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className='p-2 border rounded'
                                 required
                                 />
                             </div>
-
+                       
                             <div className='row mt-5'>
-                                <button type='submit' className='btn btn-primary text-white p-2 rounded'> Login</button>
+                                <button type='submit' className='btn btn-primary text-white p-2 rounded'> Register</button>
                             </div>
 
                             <div className='row mt-3'>
-                                <p>don't have any account? <Link to='/sign-up'>Sign up here</Link> </p>
+                                <p>Already have account? <Link to='/'>Sign in here</Link> </p>
                             </div>
+
                             
                         </form>
                     </div>
@@ -93,4 +108,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default SignUp
