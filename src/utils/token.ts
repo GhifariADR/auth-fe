@@ -1,12 +1,42 @@
+import { jwtDecode } from "jwt-decode";
+
+export interface JwtToken {
+  sub: string; //username
+  id: number;  
+  exp: number;
+  iat: number;
+}
+
 
 export const saveToken = (token: string) => {
-    localStorage.setItem('token', token);
-  };
+  localStorage.setItem('token', token);
+};
   
 export const getToken = (): string | null => {
-return localStorage.getItem('token');
+  return localStorage.getItem('token');
 };
 
 export const clearToken = () => {
-localStorage.removeItem('token');
+  localStorage.removeItem('token');
+};
+
+export const decodeToken = () : JwtToken|null => {
+  const token = getToken();
+
+  if (!token) return null;
+
+  try {
+    return jwtDecode<JwtToken>(token);
+  } catch (err) {
+    console.error("Gagal decode token:", err);
+    return null;
+  }
+}
+
+export const getUsername = (): string | null => {
+  return decodeToken()?.sub ?? null;
+};
+
+export const getUserId = (): number | null => {
+  return decodeToken()?.id ?? null;
 };

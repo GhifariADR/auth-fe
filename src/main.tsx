@@ -4,14 +4,32 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import Login from './pages/Login'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './Routes/ProtectedRoute';
 
 createRoot(document.getElementById('root')!).render(
+
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />}/>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
+
+    <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="light"
+      />
     
   </StrictMode>,
 )

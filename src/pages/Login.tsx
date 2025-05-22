@@ -1,34 +1,42 @@
-import React, { useState } from 'react'
-import "./Login.css"
-import { login, type LoginRequest } from '../services/authService';
-import axios from 'axios';
-import { saveToken } from '../utils/token';
+import React, { useEffect, useState } from 'react'
+import "../style/Login.css"
+import { login } from '../api/authService';
+import { getToken, saveToken } from '../utils/token';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [message, setMessage]= useState<string | null>(null)
-    const [error, setError] = useState<string | null>(null);
     const [token, setToken] = useState<string | null>(null);
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = getToken();
+
+        if(token) {
+            navigate('/dashboard');
+        }
+    })
 
     const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault();
-        setError(null);
 
         try{
             const response = await login({username, password});
             
             if(response.data == null){
-                setError(response.message)
+                toast.error(response.message)
                 
+            } else {
+                setToken(response.data.token)
+                toast.success(response.message)           
+                console.log("token = " + response.data.token);
+                saveToken(response.data.token)
+                navigate('/dashboard')
             }
-
-            setToken(response.data.token)
-            setMessage(response.message)
-
-            console.log("token = " + response.data.token);
             
         } catch(err){
            console.log("");
@@ -37,12 +45,11 @@ const Login: React.FC = () => {
        
     }
 
-
   return (
     <div className='bg-image'>
         <div className='container'>
             <div className='row d-flex justify-content-center align-items-center'>
-                <div className='card mt-5' >
+                <div className='card' >
                     <div className='row text-center'>
                         <h1>Login Account</h1>
                     </div>
@@ -74,11 +81,8 @@ const Login: React.FC = () => {
                             <div className='row mt-5'>
                                 <button type='submit' className='btn btn-primary text-white p-2 rounded'> Login</button>
                             </div>
-                            {error && <div className="alert alert-danger mt-3">{error}</div>}
-                            {message && <div className="alert alert-success mt-3">{message}</div>}
                             
                         </form>
-
                     </div>
                 </div>
             </div>
