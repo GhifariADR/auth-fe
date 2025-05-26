@@ -9,21 +9,23 @@ import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import SignUp from './pages/SignUp';
 import PublicRoute from './Routes/PublicRoute';
+import RentalUnitDetail from './pages/RentalUnitDetail';
 
 createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        {/* ini public routes */}
+        {/*public routes */}
         <Route element={<PublicRoute/>}>
           <Route path='/' element={<Login />}/>
           <Route path="/sign-up" element={<SignUp/>} />
         </Route>
 
-        {/* ini protected routes */}
+        {/*protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/units/:id" element={<RentalUnitDetail/>}/>
         </Route>
 
       </Routes>

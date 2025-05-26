@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getUsername } from '../utils/token'
+import RentalUnitList from '../components/RentalUnitList'
 
 const DashboardLayout:React.FC = () => {
 
@@ -10,9 +11,12 @@ const DashboardLayout:React.FC = () => {
     },[username])
 
   return (
-    <div>
-        <div className='container mt-5'>
-            <h1>Hai {username} , Selamat datang di dashboard</h1>
+    <div className='container mt-5'>
+        <div className='row'>
+            <h1>Hai <span className='text-capitalize'>{username}</span> , Selamat datang di dashboard</h1>
+        </div>
+        <div className='row mt-3'>
+          <RentalUnitList/>
         </div>
     </div>
   )

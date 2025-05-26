@@ -1,5 +1,4 @@
 import React from 'react'
-import spinner from '../assets/Rolling@1x-1.0s-200px-200px.gif'
 import '../style/LoadingOverlay.css'
 
 interface LoadingOverlayProps {

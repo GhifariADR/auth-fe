@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "../style/Login.css"
 import { login } from '../api/authService';
-import { getToken, saveToken } from '../utils/token';
+import { saveToken } from '../utils/token';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../components/LoadingOverlay';

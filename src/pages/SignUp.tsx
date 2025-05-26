@@ -33,7 +33,7 @@ const SignUp:React.FC = () => {
             toast.success(response.message)
             navigate('/')
 
-
+            
         } catch(err) {
             console.log(err);
             

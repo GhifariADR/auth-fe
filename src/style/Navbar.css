@@ -1,0 +1,6 @@
+/* Trigger dropdown on hover */
+.hover-dropdown:hover .dropdown-menu {
+    display: block;
+    right: -20px;
+    margin-top: 0; /* optional: removes animation delay */
+}
