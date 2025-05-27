@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { getAllUnit } from '../api/unitService'
 import '../style/RentalUnit.css'
-import type { RentalUnitResponse } from '../model/unitDTO'
 import LoadingOverlay from './LoadingOverlay'
 import { useNavigate } from 'react-router-dom'
+import type { RentalUnit} from '../model/unitDTO'
+import { toast } from 'react-toastify'
 
 const RentalUnitList:React.FC = () => {
 
-    const [units, setUnits] = useState<RentalUnitResponse[]>([])
+    const [units, setUnits] = useState<RentalUnit[]>([])
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null)
 
     const navigate = useNavigate();
 
@@ -22,12 +24,18 @@ const RentalUnitList:React.FC = () => {
         setLoading(true)
 
         try {
-            const data = await getAllUnit();
-            setUnits(data)
-            console.log(data);
+            const response = await getAllUnit();
+
+            if(response.data == null){
+                toast.error(response.message)
+            }
+
+            setUnits(response.data)
+            console.log(response.data);
     
         } catch(err){
-            console.log(err);
+            setError("Failed to fetch rental unit")
+            toast.error("Failed to fetch rental unit")
             
         } finally {
             setLoading(false)
@@ -39,13 +47,14 @@ const RentalUnitList:React.FC = () => {
     }
 
     if (loading) return <LoadingOverlay show={loading}/>
+    if (error) return <p className='text-danger'>{error}</p>
 
 
   return (
     <div>
         <div className='row'>
             {units.map((unit) =>(
-                <div key={unit.id} className='col-md-4 col-sm-12' onClick={() =>{detailUnit(unit.id)}} style={{cursor: 'pointer'}}>
+                <div key={unit.id} className='col-md-4 col-sm-12 mb-3' onClick={() =>{detailUnit(unit.id)}} style={{cursor: 'pointer'}}>
                     <div className='unit-box shadow-sm'>
                         <div className='card-body'>
                             <h5 className='card-title'>{unit.name}</h5>

@@ -1,26 +1,8 @@
-// export interface RentalUnitResponse {
-//   id: number;
-//   name: string;
-//   address: string;
-//   monthlyRent: number;
-//   status: 'available' | 'rented';
-//   payment: null; 
-// }
-
-
-// export interface RentalUnit {
-//     id: number;
-//     name: string;
-//     address: string;
-//     monthlyRent: number;
-//     status: 'available' | 'rented';
-//     payment: Payment; 
-// }
 
 export interface RentalUnitResponse {
   status: string;
   message: string;
-  data: RentalUnit;
+  data: RentalUnit[];
 }
 
 export interface RentalUnit {
@@ -29,7 +11,7 @@ export interface RentalUnit {
   address: string
   monthlyRent: number
   status: string
-  payment: Payment[]
+  payment: Payment[] | null
 }
 
 export interface Payment {
@@ -40,4 +22,10 @@ export interface Payment {
   paymentDate: string
   paymentMethod: string
   notes: any
+}
+
+export interface RentalUnitDetailResponse{
+  status: string;
+  message: string;
+  data: RentalUnit;
 }
