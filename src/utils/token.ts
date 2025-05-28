@@ -40,3 +40,13 @@ export const getUsername = (): string | null => {
 export const getUserId = (): number | null => {
   return decodeToken()?.id ?? null;
 };
+
+export const isTokenExpired = () : boolean | null => {
+  const decode = decodeToken();
+  if(!decode || !decode.exp) return true
+
+  const now = Math.floor(Date.now() / 1000);
+
+  return decode.exp < now;
+
+}

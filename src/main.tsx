@@ -10,6 +10,8 @@ import ProtectedRoute from './Routes/ProtectedRoute';
 import SignUp from './pages/SignUp';
 import PublicRoute from './Routes/PublicRoute';
 import RentalUnitDetail from './pages/RentalUnitDetail';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 createRoot(document.getElementById('root')!).render(
 
@@ -20,6 +22,8 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<PublicRoute/>}>
           <Route path='/' element={<Login />}/>
           <Route path="/sign-up" element={<SignUp/>} />
+          <Route path='/forgot-password' element={<ForgotPassword/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>} />
         </Route>
 
         {/*protected routes */}

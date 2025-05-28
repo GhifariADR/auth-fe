@@ -73,8 +73,11 @@ const Login: React.FC = () => {
                                 required
                                 />
                             </div>
+                            <div className='row'>
+                                <p><Link to='/forgot-password'>Forgot Password ?</Link> </p>
+                            </div>
 
-                            <div className='row mt-5'>
+                            <div className='row mt-3'>
                                 <button type='submit' className='btn btn-primary text-white p-2 rounded'> Login</button>
                             </div>
 
