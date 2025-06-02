@@ -28,10 +28,19 @@ const PaymentHistoryTable:React.FC<Props> = ({payments}) => {
             <tbody>
                 {payments.map((payment) => (
                     <tr key={payment.id}>
-                        <td>{payment.monthPaidFor}</td>
+                        <td>{new Date(payment.monthPaidFor).toLocaleString('en-EN' ,{
+                            year: 'numeric',
+                            month : 'long',                          
+                        })}</td>                   
                         <td>Rp {payment.amount.toLocaleString('id-ID')}</td>
                         <td>{payment.payerName}</td>
-                        <td>{payment.paymentDate}</td>
+                        <td>{new Date(payment.paymentDate).toLocaleString('en-EN' ,{
+                            year: 'numeric',
+                            month : 'long',
+                            day : 'numeric',
+                            hour : '2-digit',
+                            minute : '2-digit'
+                        })}</td>
                         <td>{payment.paymentMethod}</td>
                         <td>{payment.notes ?? '-'}</td>
                     </tr>

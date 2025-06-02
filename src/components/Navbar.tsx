@@ -4,11 +4,14 @@ import { clearToken, getToken, getUsername } from '../utils/token'
 import '../style/Navbar.css'
 import { logout } from '../api/authService'
 import { toast } from 'react-toastify'
+import { handleAxiosError } from '../utils/handelAxiosError'
+import LoadingOverlay from './LoadingOverlay'
 
 const Navbar:React.FC = () => {
 
     const [token, setToken ] = useState<string | null>('');
     const [username, setUsername ] = useState<string | null>('');
+    const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate();
 
@@ -19,29 +22,32 @@ const Navbar:React.FC = () => {
 
 
     const handleLogout = async () => {
+      setLoading(true);
 
       if(!token) {
-          toast.info("Token unavailable");
-          return
+        toast.info("Token unavailable");
+        return
       }
       
       try{
-          const response = await logout({token})
+        const response = await logout({token})
 
-          if (response.status == "error"){
-            toast.error(response.message)
-            return
-          }
+        if (response.status == "error"){
+          toast.error(response.message)
+          return
+        }
 
-          clearToken();
-          navigate('/')
-          toast.success(response.message)
+        clearToken();
+        navigate('/')
+        toast.success(response.message)
 
       } catch(err) {
-          console.log(err);
-          
+        handleAxiosError(err)
+      } finally {
+        setLoading(false)
       }
     }
+
 
 
   return (
@@ -91,17 +97,7 @@ const Navbar:React.FC = () => {
           </ul>
         </div>
       </div>
-
-      {/* <div className='d-flex align-items-center gap-3 logout-wrapper'>
-        <div className='text-white'>{username}</div>
-        <div className='avatar' style={{backgroundColor : 'white', width:'30px' ,height: '30px', borderRadius:'50px'}}/>
-        
-        <div className='logout-container'>
-          <button className="btn btn-sm btn-outline-light ms-3" onClick={handleLogout}>Logout</button>
-        </div>
-        
-
-      </div> */}
+      <LoadingOverlay show={loading}/>
       
     </nav>
   )

@@ -3,16 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../components/LoadingOverlay';
 import { register } from '../api/authService';
 import { toast } from 'react-toastify';
+import { usePageTitle } from '../utils/usePageTitle';
 
 const SignUp:React.FC = () => {
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
-
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate();
+    usePageTitle("Register")
+
 
     const handleSubmit = async (e: React.FormEvent) => {
         setLoading(true)

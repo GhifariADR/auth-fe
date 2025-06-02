@@ -5,6 +5,8 @@ import { saveToken } from '../utils/token';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { handleAxiosError } from '../utils/handelAxiosError';
+import { usePageTitle } from '../utils/usePageTitle';
 
 const Login: React.FC = () => {
     const [username, setUsername] = useState<string>('');
@@ -13,6 +15,7 @@ const Login: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate();
+    usePageTitle("Login")
 
     const handleSubmit = async (e: React.FormEvent) => {
         setLoading(true)
@@ -27,13 +30,12 @@ const Login: React.FC = () => {
             } else {
                 setToken(response.data.token)
                 toast.success(response.message)           
-                console.log("token = " + response.data.token);
                 saveToken(response.data.token)
                 navigate('/dashboard')
             }
             
         } catch(err){
-           console.log("");
+           handleAxiosError(err)
            
         } finally {
             setLoading(false)

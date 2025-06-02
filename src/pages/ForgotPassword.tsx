@@ -5,11 +5,14 @@ import { forgotPassword } from '../api/authService';
 import { toast } from 'react-toastify';
 import { handleAxiosError } from '../utils/handelAxiosError';
 import { Link } from 'react-router-dom';
+import { usePageTitle } from '../utils/usePageTitle';
 
 const ForgotPassword = () => {
 
   const [email, setEmail] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
+
+  usePageTitle("Forgot Password")
 
   const handleSubmit = async (e: React.FormEvent) => {
     setLoading(true)

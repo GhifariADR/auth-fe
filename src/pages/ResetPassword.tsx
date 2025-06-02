@@ -5,6 +5,7 @@ import LoadingOverlay from '../components/LoadingOverlay';
 import { toast } from 'react-toastify';
 import { resetPassword } from '../api/authService';
 import { handleAxiosError } from '../utils/handelAxiosError';
+import { usePageTitle } from '../utils/usePageTitle';
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");
@@ -13,6 +14,8 @@ const ResetPassword = () => {
     const [token, setToken] = useState<string | null>("")
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+
+    usePageTitle("Reset Password")
 
     useEffect(() => {
         setToken(searchParams.get('token'))
