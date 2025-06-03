@@ -6,12 +6,17 @@ import type { RentalUnitDetailResponse} from '../model/unitDTO';
 import LoadingOverlay from '../components/LoadingOverlay';
 import PaymentHistoryTable from '../components/PaymentHistoryTable';
 import { toast } from 'react-toastify';
+import PaymentForm from '../components/PaymentForm';
+import { addPayment} from '../api/paymentService';
+import { handleAxiosError } from '../utils/handelAxiosError';
+import type { PaymentFormData } from '../model/paymentDTO';
 
 const RentalUnitDetail: React.FC = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [unit, setUnit] = useState<RentalUnitDetailResponse| null> (null)
     const {id} = useParams<string>();
+    const rentalUnitId = Number(id)
 
     useEffect(() => {
         fetchData();
@@ -40,8 +45,29 @@ const RentalUnitDetail: React.FC = () => {
             setLoading(false)
         }
     }
+    const handleSubmitPayment = async (paymentData: PaymentFormData) =>{
+        setLoading(true)
 
-    if (loading) return <LoadingOverlay show={loading}/>
+        try{           
+            
+           const response =  await addPayment(paymentData);
+           console.log(response);
+           
+           if (response.status == 'error'){
+                toast.error(response.message)
+                return
+           }
+
+           toast.success(response.message)
+           fetchData();
+
+        } catch(err){
+            handleAxiosError(err)
+        } finally {
+            setLoading(false)
+        }
+
+    }
 
     const rentalUnit = unit?.data;
 
@@ -53,10 +79,13 @@ const RentalUnitDetail: React.FC = () => {
                 <h1 className='text-capitalize'>{rentalUnit?.name}</h1>
             </div>
             <div className='row mt-3 mx-1'>
+                <PaymentForm rentalUnitId={rentalUnitId} onSubmit={handleSubmitPayment}/>
+            </div>
+            <div className='row mt-3 mx-1'>
                 <PaymentHistoryTable payments={rentalUnit?.payment ?? []}/>
             </div>
-            
         </div>
+        <LoadingOverlay show={loading}/>
         
     </div>
   )

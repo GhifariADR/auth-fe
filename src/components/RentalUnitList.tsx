@@ -46,7 +46,6 @@ const RentalUnitList:React.FC = () => {
         navigate(`/units/${id}`);
     }
 
-    if (loading) return <LoadingOverlay show={loading}/>
     if (error) return <p className='text-danger'>{error}</p>
 
 
@@ -66,6 +65,7 @@ const RentalUnitList:React.FC = () => {
                 </div>
             ))}
         </div>
+        <LoadingOverlay show={loading}/>
     </div>
   )
 }

@@ -2,7 +2,8 @@ import { jwtDecode } from "jwt-decode";
 
 export interface JwtToken {
   sub: string; //username
-  id: number;  
+  id: number;
+  role:string  
   exp: number;
   iat: number;
 }
@@ -48,5 +49,12 @@ export const isTokenExpired = () : boolean | null => {
   const now = Math.floor(Date.now() / 1000);
 
   return decode.exp < now;
+
+}
+
+export const isAdmin = (): boolean => {
+  const decode = decodeToken();
+  return decode?.role === 'admin'
+
 
 }
