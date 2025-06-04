@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
 import { useParams } from 'react-router-dom'
 import { getDetailUnit} from '../api/unitService';
 import type { RentalUnitDetailResponse} from '../model/unitDTO';
@@ -10,6 +9,7 @@ import PaymentForm from '../components/PaymentForm';
 import { addPayment} from '../api/paymentService';
 import { handleAxiosError } from '../utils/handelAxiosError';
 import type { PaymentFormData } from '../model/paymentDTO';
+import SideBar from '../components/SideBar';
 
 const RentalUnitDetail: React.FC = () => {
 
@@ -73,9 +73,9 @@ const RentalUnitDetail: React.FC = () => {
 
   return (
     <div>
-        <Navbar/>
+        <SideBar/>
         <div className='container'>
-            <div className='row mt-5'>
+            <div className='row mt-1'>
                 <h1 className='text-capitalize'>{rentalUnit?.name}</h1>
             </div>
             <div className='row mt-3 mx-1'>

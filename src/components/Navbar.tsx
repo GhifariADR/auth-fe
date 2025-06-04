@@ -22,82 +22,82 @@ const Navbar:React.FC = () => {
 
 
     const handleLogout = async () => {
-      setLoading(true);
+        setLoading(true);
 
-      if(!token) {
-        toast.info("Token unavailable");
-        return
-      }
-      
-      try{
-        const response = await logout({token})
+        if(!token) {
+            toast.info("Token unavailable");
+            return
+        }
+        
+        try{
+            const response = await logout({token})
 
         if (response.status == "error"){
-          toast.error(response.message)
-          return
+            toast.error(response.message)
+            return
         }
 
         clearToken();
         navigate('/')
         toast.success(response.message)
 
-      } catch(err) {
-        handleAxiosError(err)
-      } finally {
-        setLoading(false)
-      }
+        } catch(err) {
+            handleAxiosError(err)
+        } finally {
+            setLoading(false)
+        }
     }
 
 
 
   return (
-    <nav className="navbar navbar-dark bg-dark px-4 d-flex justify-content-between">
-      <div>
-        <Link className="navbar-brand" to="/dashboard">MyApp</Link>
-      </div>
-      
-      <div className="d-md-flex gap-5 d-none text-white">
-        <Link className="nav-link" to="/dashboard">Dashboard</Link>
-        <Link className="nav-link" to="/dashboard">Dashboard</Link>
-        <Link className="nav-link" to="/dashboard">Dashboard</Link>
-      </div>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4 d-flex justify-content-between">
+        <div>
+            <Link className="navbar-brand" to="/dashboard">MyApp</Link>
+        </div>
+        
+        <div className="d-md-flex gap-5 d-none text-white">
+            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+        </div>
 
-      <div className="d-flex align-items-center gap-5 mx-2">
+        <div className="d-flex align-items-center gap-5 mx-2">
         {/* Dropdown user */}
         <div className="dropdown hover-dropdown">
-          <div
+            <div
             className="d-flex align-items-center gap-2 dropdown-toggle"
             role="button"
             id="userDropdown"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-          >
+            >
             <span className="text-white text-capitalize">{username}</span>
             <div
-              style={{
+                style={{
                 backgroundColor: "white",
                 width: "30px",
                 height: "30px",
                 borderRadius: "50%",
-              }}
+                }}
             ></div>
-          </div>
+            </div>
 
-          <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-            <li>
-              <button className="dropdown-item" onClick={() => navigate("/profile")}>
-                Profile
-              </button>
-            </li>
-            <li>
-              <button className="dropdown-item" onClick={handleLogout}>
-                Logout
-              </button>
-            </li>
-          </ul>
+            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li>
+                    <button className="dropdown-item" onClick={() => navigate("/profile")}>
+                    Profile
+                    </button>
+                </li>
+                <li>
+                    <button className="dropdown-item" onClick={handleLogout}>
+                    Logout
+                    </button>
+                </li>
+            </ul>
         </div>
-      </div>
-      <LoadingOverlay show={loading}/>
+        </div>
+        <LoadingOverlay show={loading}/>
       
     </nav>
   )

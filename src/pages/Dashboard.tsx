@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '../components/Navbar';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { usePageTitle } from '../utils/usePageTitle';
+import SideBar from '../components/SideBar';
 
 const Dashboard: React.FC = () => {
 
@@ -9,8 +9,8 @@ const Dashboard: React.FC = () => {
     
   return (
     <div>
-      <Navbar/>
-      <DashboardLayout/>
+        <SideBar/>                   
+        <DashboardLayout/>                    
     </div>
     
   );
