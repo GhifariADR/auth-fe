@@ -50,9 +50,12 @@ const SideBar:React.FC = () => {
     
   return (
     <div>
-        <button className='btn btn-light top-0 start-0 m-2 z-1' onClick={toogleSideBar}>
-            {isOpen ? <FaTimes/> : <FaBars/>}
-        </button>
+        <div>
+            <button className='btn btn-light m-2 z-1 ' onClick={toogleSideBar}>
+                {isOpen ? <FaTimes/> : <FaBars/>}
+            </button>
+        </div>
+        
       {!isOpen && (
         <div
           className="d-none d-md-block position-fixed top-0 start-0 bg-dark"
@@ -89,35 +92,16 @@ const SideBar:React.FC = () => {
                     </li>
 
                     <li className='nav-item mb-2'>
-                        <div className='accordion accordion-flush mx-3' id='menuAccordion'>
-                            <div className="accordion-item bg-transparent border-0">
-                                <h2 className="accordion-header">
-                                <button
-                                    className="accordion-button collapsed bg-transparent text-white p-0"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#collapseMenu"
-                                >
-                                    Menu
-                                </button>
-                                </h2>
-                                <div
-                                id="collapseMenu"
-                                className="accordion-collapse collapse"
-                                data-bs-parent="#menuAccordion"
-                                >
-                                    <div className="accordion-body ps-3">
-                                        <ul className="nav flex-column">
-                                        <li className="nav-item">
-                                            <a className="nav-link text-white" href="#">Submenu 1</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link text-white" href="#">Submenu 2</a>
-                                        </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                        <button className='nav-link bg-transparent text-white'>Admin</button>
+                        <div className='accordion-container'>
+                            <ul className='nav ps-3'>
+                                <li className='nav-item'>                                   
+                                    <Link className='nav-link text-white' to='/dashboard'>User Management</Link>
+                                </li>
+                                <li className='nav-item'>
+                                    <Link className='nav-link text-white' to='/dashboard'>Role Management</Link>
+                                </li>
+                            </ul>
                         </div>
                     </li>
                 </ul>

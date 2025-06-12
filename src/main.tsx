@@ -13,27 +13,32 @@ import PublicRoute from './Routes/PublicRoute';
 import RentalUnitDetail from './pages/RentalUnitDetail';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
+import UnitCreateForm from './pages/unit/UnitCreateForm';
 
 createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
     <BrowserRouter>
-      <Routes>
+        <Routes>
         {/*public routes */}
         <Route element={<PublicRoute/>}>
-          <Route path='/' element={<Login />}/>
-          <Route path="/sign-up" element={<SignUp/>} />
-          <Route path='/forgot-password' element={<ForgotPassword/>}/>
-          <Route path='/reset-password' element={<ResetPassword/>} />
+            <Route path='/' element={<Login />}/>
+            <Route path="/sign-up" element={<SignUp/>} />
+            <Route path='/forgot-password' element={<ForgotPassword/>}/>
+            <Route path='/reset-password' element={<ResetPassword/>} />
         </Route>
 
         {/*protected routes */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/units/:id" element={<RentalUnitDetail/>}/>
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/units/:id" element={<RentalUnitDetail/>}/>
+            <Route path="/unit-create-form" element={<UnitCreateForm/>}/>
+
+
         </Route>
 
-      </Routes>
+        </Routes>
     </BrowserRouter>
 
     <ToastContainer

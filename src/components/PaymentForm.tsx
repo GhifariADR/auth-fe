@@ -24,7 +24,6 @@ const PaymentForm: React.FC<PaymentFormProps> = ({rentalUnitId, onSubmit}) => {
     const handleChange = (e:React.ChangeEvent<HTMLInputElement| HTMLTextAreaElement | HTMLSelectElement>) => {
         const {name, value} = e.target;
         setForm(prev => ({...prev, [name]: value}));
-        console.log(form);
         
     }
 
@@ -47,7 +46,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({rentalUnitId, onSubmit}) => {
   return (
     <div>
         {isAdmin() && 
-        <form onSubmit={handleSubmit} className="card" style={{width:'100%', marginTop:'1px'}}>       
+        <form onSubmit={handleSubmit} className="card mt-2 w-100">       
             <h4>Payment Form</h4>
             <div className="row">
                 <div className="col-6 mb-3">
@@ -90,7 +89,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({rentalUnitId, onSubmit}) => {
             </div>
             <div className="row">
                 <div className="col-md-12">
-                    <button type="submit" className="btn btn-primary">Submit Payment</button>
+                    <button type="submit" className="btn btn-primary w-100">Submit Payment</button>
                 </div>
                 
             </div>

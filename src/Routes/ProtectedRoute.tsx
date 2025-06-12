@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { getToken, isTokenExpired } from '../utils/token';
+import { clearToken, getToken, isTokenExpired } from '../utils/token';
 import { logout } from '../api/authService';
 import { toast } from 'react-toastify';
 
@@ -11,6 +11,7 @@ const ProtectedRoute:React.FC = () => {
   const handleLogout = async () => {
     try {
       const response = await logout({token});
+      clearToken();
       toast.success(response.message)
       return <Navigate to="/" replace />;
 
