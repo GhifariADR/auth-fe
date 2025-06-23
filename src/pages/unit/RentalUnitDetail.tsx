@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getDetailUnit} from '../api/unitService';
-import type { RentalUnitDetailResponse} from '../model/unitDTO';
-import LoadingOverlay from '../components/LoadingOverlay';
-import PaymentHistoryTable from '../components/PaymentHistoryTable';
+import { getDetailUnit} from '../../api/unitService';
+import type { RentalUnitDetailResponse} from '../../model/unitDTO';
+import LoadingOverlay from '../../components/LoadingOverlay';
+import PaymentHistoryTable from '../../components/PaymentHistoryTable';
 import { toast } from 'react-toastify';
-import PaymentForm from '../components/PaymentForm';
-import { addPayment} from '../api/paymentService';
-import { handleAxiosError } from '../utils/handelAxiosError';
-import type { PaymentFormData } from '../model/paymentDTO';
-import SideBar from '../components/SideBar';
+import PaymentForm from '../../components/PaymentForm';
+import { addPayment} from '../../api/paymentService';
+import { handleAxiosError } from '../../utils/handelAxiosError';
+import type { PaymentFormData } from '../../model/paymentDTO';
+import SideBar from '../../components/sideBar/SideBar';
 
 const RentalUnitDetail: React.FC = () => {
 

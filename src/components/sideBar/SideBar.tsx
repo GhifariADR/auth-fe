@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom'
-import { clearToken, getToken, getUsername } from '../utils/token';
-import { logout } from '../api/authService';
+import { clearToken, getToken, getUsername, isAdmin } from '../../utils/token';
+import { logout } from '../../api/authService';
 import { toast } from 'react-toastify';
-import { handleAxiosError } from '../utils/handelAxiosError';
-import LoadingOverlay from './LoadingOverlay';
-import '../style/SideBar.css'
+import { handleAxiosError } from '../../utils/handelAxiosError';
+import LoadingOverlay from '../LoadingOverlay';
+import '../../style/SideBar.css';
+import DropdownSidebar from './DropdownSidebar';
 
 const SideBar:React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -87,23 +88,15 @@ const SideBar:React.FC = () => {
             <div className='p-3 flex-grow-1 overflow-auto'>
                 <ul className='nav flex-column'>
                     <li className='nav-item mb-2'>
-                        <Link className='nav-link text-white' to='/dashboard'>Dashboard</Link>
-                        {/* <a className='nav-link text-white'>Dashboard</a> */}
+                        <Link className='nav-link text-white' to='/dashboard'>Dashboard</Link>                      
                     </li>
 
-                    <li className='nav-item mb-2'>
-                        <button className='nav-link bg-transparent text-white'>Admin</button>
-                        <div className='accordion-container'>
-                            <ul className='nav ps-3'>
-                                <li className='nav-item'>                                   
-                                    <Link className='nav-link text-white' to='/dashboard'>User Management</Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link className='nav-link text-white' to='/dashboard'>Role Management</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    {isAdmin() && (
+                        <DropdownSidebar
+                        title='Admin'
+                        subMenu={[{label: 'User Management', to : '/userManagement'},{label: 'Role Managenet', to : '/'}]} 
+                    />)}
+                    
                 </ul>
             </div>
             <div className="border-top border-secondary pt-3 d-flex justify-content-between align-items-center">

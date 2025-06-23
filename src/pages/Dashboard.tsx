@@ -1,7 +1,7 @@
 import React from 'react';
 import DashboardLayout from '../layouts/DashboardLayout';
 import { usePageTitle } from '../utils/usePageTitle';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/sideBar/SideBar';
 
 const Dashboard: React.FC = () => {
 

@@ -17,7 +17,7 @@ const DashboardLayout:React.FC = () => {
             <h1>Hai <span className='text-capitalize'>{username}</span> , Selamat datang di dashboard</h1>
         </div>
         <div className='row mb-4'>
-            <Link to='/unit-create-form'>
+            <Link to='/unitCreateForm'>
                 <button style={{width: '100%'}} className='btn btn-primary fw-bold'>Add Unit</button>
             </Link>
             

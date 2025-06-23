@@ -10,10 +10,11 @@ import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import SignUp from './pages/SignUp';
 import PublicRoute from './Routes/PublicRoute';
-import RentalUnitDetail from './pages/RentalUnitDetail';
+import RentalUnitDetail from './pages/unit/RentalUnitDetail';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import UnitCreateForm from './pages/unit/UnitCreateForm';
+import UserManagement from './pages/user/UserManagement';
 
 createRoot(document.getElementById('root')!).render(
 
@@ -31,10 +32,9 @@ createRoot(document.getElementById('root')!).render(
         {/*protected routes */}
         <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
-
             <Route path="/units/:id" element={<RentalUnitDetail/>}/>
-            <Route path="/unit-create-form" element={<UnitCreateForm/>}/>
-
+            <Route path="/unitCreateForm" element={<UnitCreateForm/>}/>
+            <Route path='/userManagement' element={<UserManagement/>}/>
 
         </Route>
 
