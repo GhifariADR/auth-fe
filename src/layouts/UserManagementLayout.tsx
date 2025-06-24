@@ -1,4 +1,5 @@
 import React from 'react'
+import UserList from '../components/user/UserList'
 
 const UserManagementLayout:React.FC = () => {
     return (
@@ -7,7 +8,7 @@ const UserManagementLayout:React.FC = () => {
                 <h1>User Management</h1>
             </div>
             <div className='row col-12'>
-                
+                <UserList/>
             </div>
 
         </div>
