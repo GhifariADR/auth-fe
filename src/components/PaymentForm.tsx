@@ -45,7 +45,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({rentalUnitId, onSubmit}) => {
 
   return (
     <div>
-        {isAdmin() && 
+        {isAdmin() &&
         <form onSubmit={handleSubmit} className="card mt-2 w-100">       
             <h4>Payment Form</h4>
             <div className="row">

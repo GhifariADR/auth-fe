@@ -16,32 +16,31 @@ import ResetPassword from './pages/ResetPassword';
 import UnitCreateForm from './pages/unit/UnitCreateForm';
 import UserManagement from './pages/user/UserManagement';
 
-createRoot(document.getElementById('root')!).render(
+export const renderApp = () => {
+  const root = createRoot(document.getElementById('root')!);
+  root.render(
+    <StrictMode>
+        <BrowserRouter>
+            <Routes>
+                {/* Public Routes */}
+                <Route element={<PublicRoute />}>
+                    <Route path="/" element={<Login />} />
+                    <Route path="/sign-up" element={<SignUp />} />
+                    <Route path="/forgot-password" element={<ForgotPassword />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
+                </Route>
 
-  <StrictMode>
-    <BrowserRouter>
-        <Routes>
-        {/*public routes */}
-        <Route element={<PublicRoute/>}>
-            <Route path='/' element={<Login />}/>
-            <Route path="/sign-up" element={<SignUp/>} />
-            <Route path='/forgot-password' element={<ForgotPassword/>}/>
-            <Route path='/reset-password' element={<ResetPassword/>} />
-        </Route>
+                {/* Protected Routes */}
+                <Route element={<ProtectedRoute />}>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/rentalUnitDetail/:id" element={<RentalUnitDetail />} />
+                    <Route path="/unitCreateForm" element={<UnitCreateForm />} />
+                    <Route path="/userManagement" element={<UserManagement />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
 
-        {/*protected routes */}
-        <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/units/:id" element={<RentalUnitDetail/>}/>
-            <Route path="/unitCreateForm" element={<UnitCreateForm/>}/>
-            <Route path='/userManagement' element={<UserManagement/>}/>
-
-        </Route>
-
-        </Routes>
-    </BrowserRouter>
-
-    <ToastContainer
+        <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -50,7 +49,7 @@ createRoot(document.getElementById('root')!).render(
         pauseOnFocusLoss
         pauseOnHover
         theme="light"
-      />
-    
-  </StrictMode>,
-)
+        />
+    </StrictMode>
+  );
+};

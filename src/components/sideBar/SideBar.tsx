@@ -81,7 +81,7 @@ const SideBar:React.FC = () => {
             </div>
             <div className='p-3 border-bottom border-secondary d-flex align-items-center gap-2'>
                 <a className='navbar-brand'>
-                    <img width={'60px'} src='../public/logo.png'/>
+                    <img width={'60px'} src='/logo.png'/>
                     
                 </a>
             </div>

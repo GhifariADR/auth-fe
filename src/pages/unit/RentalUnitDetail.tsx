@@ -79,7 +79,10 @@ const RentalUnitDetail: React.FC = () => {
                 <h1 className='text-capitalize'>{rentalUnit?.name}</h1>
             </div>
             <div className='row mt-3 mx-1'>
-                <PaymentForm rentalUnitId={rentalUnitId} onSubmit={handleSubmitPayment}/>
+                {unit &&
+                    <PaymentForm rentalUnitId={rentalUnitId} onSubmit={handleSubmitPayment}/>
+                }
+                
             </div>
             <div className='row mt-3 mx-1'>
                 <PaymentHistoryTable payments={rentalUnit?.payment ?? []}/>

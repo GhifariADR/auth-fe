@@ -58,8 +58,8 @@ const UserList:React.FC = () => {
   return (
     <div className='mt-5'>
         <div className='row'>
-            <div className='col-md-4 col-sm-12 d-flex '>
-                <label className='form-label mt-1 me-2' >Keyword</label>
+            <div className='col-md-6 col-sm-12 d-flex '>
+                <label className='form-label mt-1 me-2' >Search</label>
                 <input
                 type='text'
                 placeholder='Input keyword'

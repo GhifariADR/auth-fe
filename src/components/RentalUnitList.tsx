@@ -42,7 +42,7 @@ const RentalUnitList:React.FC = () => {
     }
 
     const detailUnit = (id:number) => {
-        navigate(`/units/${id}`);
+        navigate(`/rentalUnitDetail/${id}`);
     }
 
 
