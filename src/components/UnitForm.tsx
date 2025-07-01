@@ -86,7 +86,7 @@ const UnitForm:React.FC = () => {
                             decimalSeparator=','
                            
                             decimalsLimit={0}
-                            onValueChange={(value, name, values) => {
+                            onValueChange={(_value, _name, values) => {
                                 setForm((prev) => ({
                                 ...prev,
                                 monthlyRent: values?.float ?? 0,

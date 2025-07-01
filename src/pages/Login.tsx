@@ -11,7 +11,7 @@ import { usePageTitle } from '../utils/usePageTitle';
 const Login: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [token, setToken] = useState<string | null>(null);
+    const [_, setToken] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false)
 
     const navigate = useNavigate();

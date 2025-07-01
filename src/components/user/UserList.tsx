@@ -6,7 +6,7 @@ import Pagination from '../Pagination';
 
 const UserList:React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [_, setLoading] = useState<boolean>(false);
     const [keyword, setKeyword] = useState<string>('');
     const [totalPages, setTotalPages] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(0);
