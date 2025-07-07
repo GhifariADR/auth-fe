@@ -1,6 +1,5 @@
 import axios from "axios";
 import { clearToken, getToken, isTokenExpired } from "./token";
-import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -12,11 +11,6 @@ axiosInstance.interceptors.request.use(
         const token = getToken();
 
         if (token) {
-            if(isTokenExpired()){
-                clearToken();
-                toast.error('Token Expired')
-                window.location.href = '/'
-            }
             config.headers.Authorization = `Bearer ${token}`;    
         }
         return config;
@@ -24,5 +18,17 @@ axiosInstance.interceptors.request.use(
 
     (error) => Promise.reject(error)
 );
+
+axiosInstance.interceptors.request.use(
+    (response) => response,
+    (error) => {
+        if(error.response && isTokenExpired()){
+            clearToken();
+            window.location.href = '/';
+        }
+
+        return Promise.reject(error)
+    }
+)
 
 export default axiosInstance;
