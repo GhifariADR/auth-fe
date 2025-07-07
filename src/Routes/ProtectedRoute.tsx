@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { getToken} from '../utils/token';
+import { clearToken, getToken, isTokenExpired} from '../utils/token';
 
 
 
@@ -7,7 +7,13 @@ const ProtectedRoute:React.FC = () => {
 
     const token = getToken();
 
+    if(isTokenExpired()) {
+        clearToken();
+        return <Navigate to="/" replace />;
+    }
+
     if (!token) {
+        
         return <Navigate to="/" replace />;
     }
 
