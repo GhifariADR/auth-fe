@@ -61,6 +61,25 @@ const RentalUnitList:React.FC = () => {
                     </div>
                 </div>
             ))}
+
+            {units && units.length > 0 ? (
+                units.map((unit) =>(
+                <div key={unit.id} className='col-md-4 col-sm-12 mb-3' onClick={() =>{detailUnit(unit.id)}} style={{cursor: 'pointer'}}>
+                    <div className='unit-box shadow-sm'>
+                        <div className='card-body'>
+                            <h5 className='card-title text-capitalize'>{unit.name}</h5>
+                            <p className='card-text'>Alamat : {unit.address}</p>
+                            <p className='card-text'>Harga : Rp {unit.monthlyRent.toLocaleString()} /bulan</p>
+                            <p className='card-text'>Status : {unit.status}</p>
+                        </div>
+                    </div>
+                </div>
+            ))
+            ):(
+                <div className="col-12 text-center">
+                    <p>Unit not Founds</p>
+                </div>
+            )}
         </div>
         <LoadingOverlay show={loading}/>
     </div>
